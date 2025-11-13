@@ -1,0 +1,12 @@
+{% extends "logbookApp/base.html" %} {% block content %}
+<div class="main-container">
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+
+  <br />
+  <a href="{% url 'register' %}">Just kidding?</a>
+</div>
+{%endblock%}

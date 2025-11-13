@@ -1,0 +1,66 @@
+{% extends "logbookApp/base.html" %} {% block content %}
+
+<div class="main-container">
+  <h1>8a.nu Lite</h1>
+  <h2>Welcome {{user.username}}</h2>
+  <p>Search the database and log you sends!</p>
+  <a href="{% url 'logbook' %}">See logbook</a>
+
+  <div id="lcc-container">
+    <h2>Little Cottonwood Canyon</h2>
+    <table>
+      <tr>
+        <th>Climb</th>
+        <th>Grade</th>
+        <th>Description</th>
+        <th>View Comments</th>
+        <th>Log Option</th>
+      </tr>
+      {% for climb in climbs_lcc %}
+      <tr>
+        <td>{{climb.name}}</td>
+        <td>{{climb.grade}}</td>
+        <td>{{climb.description}}</td>
+        <td>
+          <a href="{% url 'comments' climb.id %}">View Comments</a>
+        </td>
+        <td>
+          <a href="{% url 'ascent' %}?climb_id={{ climb.id }}">Log Ascent</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <div id="ogden-container">
+    <h2>Ogden</h2>
+    <table>
+      <tr>
+        <th>Climb</th>
+        <th>Grade</th>
+        <th>Description</th>
+        <th>View Comments</th>
+        <th>Log Option</th>
+      </tr>
+      {% for climb in climbs_o %}
+      <tr>
+        <td>{{climb.name}}</td>
+        <td>{{climb.grade}}</td>
+        <td>{{climb.description}}</td>
+        <td>
+          <a href="{% url 'comments' climb.id %}">View Comments</a>
+        </td>
+        <td>
+          <a href="{% url 'ascent' %}?climb_id={{ climb.id }}">Log Ascent</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Logout</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "logbookApp/base.html" %} {% block content %}
+
+<div class="main-container">
+  <h1>Comments for: {{climb.name}}</h1>
+
+  <ul>
+    {% if comments|length == 0 %}
+    <p>No comments to show...</p>
+    {% else %} {% for comment in comments %}
+    <li>
+      <strong>{{comment.user.username}}</strong> said: {{comment.comment}}
+    </li>
+    <pre><strong>Proposed grade on {{comment.date}} of: </strong>{{comment.proposedGrade}} [{{comment.get_type_display}}]</pre>
+    {% endfor %} {%endif%}
+  </ul>
+  <a href="{% url 'home' %}">Home</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "logbookApp/base.html" %} {% block content %}
+
+<div class="main-container">
+  <h1>Logbook</h1>
+
+  {% if loggedAscents|length == 0 %}
+  <p>No logged climbs to see... go outside ASAP!</p>
+  <ul>
+    {% else %}{% for ascent in loggedAscents %}
+    <li>
+      {{ascent.climb}} ({{ascent.proposedGrade}}) in
+      {{ascent.climb.get_area_display}}
+      <br />
+      <pre>
+<strong>{{ascent.get_type_display}} on {{ascent.date}}:</strong> {{ascent.comment}}</pre>
+    </li>
+    <a href="{% url 'logbookUpdate' ascent.id %}">|Update Ascent|</a>
+    <a href="{% url 'logbookDelete' ascent.id %}">|Delete Ascent|</a>
+    {% endfor %}{% endif %}
+  </ul>
+  <br />
+  <a href="{% url 'home' %}">Home</a>
+</div>
+
+{% endblock %}

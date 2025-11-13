@@ -1,0 +1,13 @@
+{% extends "logbookApp/base.html" %} {% block content %}
+
+<div class="main-container">
+  <h1>Update Logbook Entry for: {{ascent.climb.name}}</h1>
+
+  <form method="post">
+    {% csrf_token %} {{form.as_p}}
+    <input type="submit" value="Submit Update" />
+  </form>
+  <br />
+  <a href="{% url 'logbook' %}">Cancel</a>
+</div>
+{%endblock%}
