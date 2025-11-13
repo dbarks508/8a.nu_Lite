@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.views.generic.edit import DeleteView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
+from django.urls import reverse_lazy
 
 from .models import Climb, Ascent
 from .forms import AscentForm
@@ -118,7 +119,10 @@ class LogbookUpdateView(AscentView):
     success_url = "/logbook/"
 
 # delete existing pi view class
-class LogbookDeleteView(AscentView):
-    model = Ascent
-    template_name = "logbookApp/logbookDelete.html"
-    success_url = "/logbook/"
+class LogbookDeleteView(DeleteView):
+     model = Ascent
+     template_name = "logbookApp/logbookDelete.html"
+     success_url = "/logbook/"
+
+     def get_queryset(self):
+        return Ascent.objects.filter(user=self.request.user)

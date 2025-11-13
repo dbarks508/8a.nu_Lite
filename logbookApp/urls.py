@@ -11,5 +11,5 @@ urlpatterns = [
     path("ascent/", views.AscentView.as_view(), name="ascent"),
     path("logbook/", views.logbook_view, name="logbook"),
     path("logbookUpdate/<int:ascent_id>", views.LogbookUpdateView.as_view(), name="logbookUpdate"),
-    path("logbookDelete/<int:ascent_id>", views.LogbookDeleteView.as_view(), name="logbookDelete"),
+    path("logbookDelete/<int:pk>", views.LogbookDeleteView.as_view(), name="logbookDelete"),
 ]
